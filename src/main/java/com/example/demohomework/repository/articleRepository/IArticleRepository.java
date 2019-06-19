@@ -16,7 +16,7 @@ public interface IArticleRepository {
     void add(Article article);
     @Update("UPDATE tb_article SET c_id=#{category.id},title=#{title},auther=#{auther},description=#{description},thumbnail=#{thumbnail} where id=#{id}")
     void update(Article article);
-    @Select("SELECT atr.id,cat.name,atr.title,atr.auther,atr.description,atr.thumbnail FROM tb_article atr  INNER JOIN tb_category cat on atr.c_id=cat.id")
+    @Select("SELECT atr.id,atr.c_id,cat.name,atr.title,atr.auther,atr.description,atr.thumbnail FROM tb_article atr  INNER JOIN tb_category cat on atr.c_id=cat.id")
     @Results({
 //            @Result(property = "category.id",column = "c_id"),
             @Result(property = "category.name",column = "name")
@@ -32,20 +32,20 @@ public interface IArticleRepository {
     Article getByID(int id);
     @Select("SELECT MAX(id) FROM tb_article")
     int getLastId();
-    @Select("SELECT atr.id,cat.name,atr.title,atr.auther,atr.description,atr.thumbnail FROM tb_article atr  INNER JOIN tb_category cat on atr.c_id=cat.id where atr.title ilike '%' || #{title} || '%'")
+    @Select("SELECT atr.id,atr.c_id,cat.name,atr.title,atr.auther,atr.description,atr.thumbnail FROM tb_article atr  INNER JOIN tb_category cat on atr.c_id=cat.id where atr.title ilike '%' || #{title} || '%'")
     @Results({
             @Result(property = "category.id",column = "c_id"),
             @Result(property = "category.name",column = "name")
     })
-    List<Article> findAllSearch();
+    List<Article> findAllSearch(String keyword);
     @Select("SELECT name from tb_category")
     List<Category> getfillter();
-    @Select("SELECT atr.id,cat.name,atr.title,atr.auther,atr.description,atr.thumbnail FROM tb_article atr  INNER JOIN tb_category cat on atr.c_id=cat.id where cat.name=#{filter}")
+    @Select("SELECT atr.id,atr.c_id,cat.name,atr.title,atr.auther,atr.description,atr.thumbnail FROM tb_article atr  INNER JOIN tb_category cat on atr.c_id=cat.id where atr.c_id=#{id}")
     @Results({
             @Result(property = "category.id",column = "c_id"),
             @Result(property = "category.name",column = "name")
     })
-    List<Article> fillter();
+    List<Article> fillter(int id);
 
     @SelectProvider(method = "paginate", type = ArticleProvider.class)
     @Results({

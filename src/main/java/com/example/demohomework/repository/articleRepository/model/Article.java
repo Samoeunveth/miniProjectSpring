@@ -1,6 +1,5 @@
 package com.example.demohomework.repository.articleRepository.model;
 
-import java.util.Locale;
 
 public class Article {
     private int id;

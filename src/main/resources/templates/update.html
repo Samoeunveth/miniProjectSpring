@@ -33,21 +33,18 @@
                 <p class="h4 mb-4">Update Aritcle</p>
                 <input type="text"  class="form-control mb-4"
                        style="background-color: rgb(221, 220, 220)"  th:field="*{id}">
-                <input type="text" class="form-control mb-4"  th:field="*{category.id}">
+                <select class="browser-default custom-select mb-4" name="category.id">
+                    <option id="opt" th:value="${category2.id}" th:each="category2 :${CATEGORIES}" th:object="${category2}" th:text="${category2.id}">
+                </select>
                 <input type="text"  class="form-control mb-4"   th:field="*{title}">
                 <input type="text" class="form-control mb-4"  th:field="*{auther}">
                 <input type="text"  class="form-control mb-4"  th:field="*{description}">
-                <!--<input type='file' id="imgInp" class="form-control mb-4" th:field="*{thumbnail}"/>-->
-                <!--<div class="Image">-->
-                    <!--<img th:src="'/image/'+*{thumbnail}" style="width:100px ;height: 100px">-->
-                <!--</div>-->
                 <input type='file' id="imageInput" class="form-control mb-4" name="thumbnailUpdate"/>
                 <div style="height: 200px; width: 200px">
                     <img id="getImage" th:src="'/image/'+*{thumbnail}"  width=100% hight=100%/>
                 </div>
                 <input type="submit" class="btn btn-primary" th:value="#{addupdate}">
                 <button class="btn btn-primary" th:text="#{goback}">+go back</button>
-                <p th:text="${article.id+article.thumbnail}"></p>
             </form>
         </div>
         <div class="col-md-3"></div>
@@ -55,20 +52,20 @@
     <th:block th:include="fragment/footer.html :: footer"></th:block>
 </div>
 <script>
-    // $(document).ready(function(){
-    //     function readURL(input) {
-    //         if (input.files && input.files[0]) {
-    //             var reader = new FileReader();
-    //             reader.onload = function(e) {
-    //                 $('#getImage').attr('src', e.target.result);
-    //             }
-    //             reader.readAsDataURL(input.files[0]);
-    //         }
-    //     }
-    //     $("#imageInput").change(function() {
-    //         readURL(this);
-    //     });
-    // });
+    $(document).ready(function(){
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    $('#getImage').attr('src', e.target.result);
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+        $("#imageInput").change(function() {
+            readURL(this);
+        });
+    });
 </script>
 </body>
 </html>

@@ -49,8 +49,6 @@
 <body>
 <div class="container-fluid">
     <th:block th:include="fragment/navbar.html :: navbar" ></th:block>
-    <!--<div class="row" th:if="${ARTICLES.size()} > 0">-->
-    <!--<div style="padding-top: 10px;color: white;">hfhtx</div>-->
     <div class="row" >
         <div class="col-md-6" >
             <a th:href="@{/category/add}"><button class="btn m btn-primary" th:text="#{addnew}">+Add new Record</button></a>

@@ -32,7 +32,10 @@
                     <p class="h4 mb-4">Add Aritcle</p>
                     <input type="ID" id="id-add" th:value="${index}" class="form-control mb-4" placeholder="id"
                            style="background-color: rgb(221, 220, 220)" name="id" >
-                    <input type="text" class="form-control mb-4" placeholder="category id" name="category.id">
+                    <select class="browser-default custom-select mb-4" name="category.id">
+                        <option selected>Open this select menu</option>
+                        <option th:value="${category.id}" th:each="category :${CATEGORIES}" th:object="${category}" th:text="${category.name}">
+                    </select>
                     <input type="text" class="form-control mb-4" placeholder="Title" name="title">
                     <input type="text" class="form-control mb-4" placeholder="Auther" name="auther">
                     <input type="text" class="form-control mb-4" placeholder="Description" name="description">

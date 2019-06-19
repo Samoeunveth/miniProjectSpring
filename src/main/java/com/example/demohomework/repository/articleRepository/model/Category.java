@@ -1,6 +1,7 @@
 package com.example.demohomework.repository.articleRepository.model;
 
 public class Category {
+
     private int id;
     private String name;
 
