@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+    <!-- Bootstrap core CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Material Design Bootstrap -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.2/css/mdb.min.css" rel="stylesheet">
+    <title>ManagementController</title>
+    <style>
+        .default-color {
+            background-color: purple!important;
+        }
+        .cyan.darken-3 {
+            background-color: purple!important;
+        }
+    </style>
+</head>
+<body th:object="${category}">
+<div class="container">
+    <th:block th:include="fragment/navbar.html :: navbar"></th:block>
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+            <!-- Default form login -->
+            <form class="text-center border border-light p-5" action="/category" >
+                <p class="h4 mb-4">view Category</p>
+                <input type="ID" id="id-view"  class="form-control mb-4" placeholder="id" th:value="*{id}">
+                <input type="text" id="title-view" class="form-control mb-4" placeholder="Title" th:value="*{name}">
+                <input type="submit" class="btn btn-primary" th:value="#{goback}">
+            </form>
+            <!-- Default form login -->
+        </div>
+        <div class="col-md-3"></div>
+    </div>
+    <th:block th:include="fragment/footer.html :: footer"></th:block>
+</div>
+
+</body>
+</html>

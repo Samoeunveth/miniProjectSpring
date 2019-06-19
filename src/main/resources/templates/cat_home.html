@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+    <!-- Font Awesome -->
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+    <!-- Bootstrap core CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Material Design Bootstrap -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.2/css/mdb.min.css" rel="stylesheet">
+    <style>
+
+        .btn {
+            padding: 5px 10px;
+            width: 70px;
+            margin: 2px;
+            height:40px;
+        }
+        .m {
+            padding: 5px 10px;
+            width: 150px;
+            margin: 2px;
+            height:40px;
+        }
+        div.row{
+            padding: 0px 15px;
+        }
+        #dtable{
+            min-height: 700px;
+        }
+        th,td{
+            text-align: center;
+        }
+        td.align-middle{
+            padding: 0px 0px 0px!important;
+        }
+        .default-color {
+            background-color: purple!important;
+        }
+        .cyan.darken-3 {
+            background-color: purple!important;
+        }
+    </style>
+</head>
+<body>
+<div class="container-fluid">
+    <th:block th:include="fragment/navbar.html :: navbar" ></th:block>
+    <!--<div class="row" th:if="${ARTICLES.size()} > 0">-->
+    <!--<div style="padding-top: 10px;color: white;">hfhtx</div>-->
+    <div class="row" >
+        <div class="col-md-6" >
+            <a th:href="@{/category/add}"><button class="btn m btn-primary" th:text="#{addnew}">+Add new Record</button></a>
+        </div>
+    </div>
+        <div id="dtable" class="col-sm-12">
+            <table class="table table-bordered" style="width: 100%;padding: 0px 0px" >
+                <thead>
+                    <tr style="background-color: black;color: white">
+                        <th scope="col" width="15%" th:text="#{id}">ID</th>
+                        <th scope="col" width="35%" th:text="#{name}">name</th>
+                        <th scope="col" width="50%" th:text="#{action}">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                <tr th:each="category : ${categories}" th:object="${category}" >
+                    <td class="align-middle" th:text="*{id}"></td>
+                    <td class="align-middle" th:text="*{name}"></td>
+                    <td class="align-middle">
+                        <a th:href="@{/category/update/{id}(id=*{id})}"><button class="btn btn-primary"
+                                                                       type="button" th:text="#{edit}">edit</button></a>
+                        <a th:href="@{/category/veiw/{id}(id=*{id})}"><button class="btn btn-primary"
+                                                                     type="button" th:text="#{addbtn}">view</button></a>
+                        <a th:href="@{/category/delete/{id}(id=*{id})}"><button type="button"
+                                                                       class="btn btn-primary" th:text="#{delete}">delete</button></a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
+</div>
+<footer id="footer">
+    <th:block th:include="fragment/footer.html :: footer"></th:block>
+</footer>
+<!-- JQuery -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<!-- Bootstrap tooltips -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"></script>
+<!-- Bootstrap core JavaScript -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<!-- MDB core JavaScript -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.2/js/mdb.min.js"></script>
+</body>
+</html>

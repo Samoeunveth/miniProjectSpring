@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Update</title>
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+    <!-- Bootstrap core CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Material Design Bootstrap -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.2/css/mdb.min.css" rel="stylesheet">
+    <style>
+        .btn{padding: 5px 10px}
+        .default-color {
+            background-color: purple!important;
+        }
+        .cyan.darken-3 {
+            background-color: purple!important;
+        }
+    </style>
+</head>
+<body style="padding-top: 20px" th:object="${article}">
+<div class="container">
+    <th:block th:include="fragment/navbar.html :: navbar"></th:block>
+    <div class="row">
+
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+            <!-- Default form login -->
+            <form class="text-center border border-light p-5" method="post" action="/update" enctype="multipart/form-data">
+                <p class="h4 mb-4">Update Aritcle</p>
+                <input type="text"  class="form-control mb-4"
+                       style="background-color: rgb(221, 220, 220)"  th:field="*{id}">
+                <input type="text" class="form-control mb-4"  th:field="*{category.id}">
+                <input type="text"  class="form-control mb-4"   th:field="*{title}">
+                <input type="text" class="form-control mb-4"  th:field="*{auther}">
+                <input type="text"  class="form-control mb-4"  th:field="*{description}">
+                <!--<input type='file' id="imgInp" class="form-control mb-4" th:field="*{thumbnail}"/>-->
+                <!--<div class="Image">-->
+                    <!--<img th:src="'/image/'+*{thumbnail}" style="width:100px ;height: 100px">-->
+                <!--</div>-->
+                <input type='file' id="imageInput" class="form-control mb-4" name="thumbnailUpdate"/>
+                <div style="height: 200px; width: 200px">
+                    <img id="getImage" th:src="'/image/'+*{thumbnail}"  width=100% hight=100%/>
+                </div>
+                <input type="submit" class="btn btn-primary" th:value="#{addupdate}">
+                <button class="btn btn-primary" th:text="#{goback}">+go back</button>
+                <p th:text="${article.id+article.thumbnail}"></p>
+            </form>
+        </div>
+        <div class="col-md-3"></div>
+    </div>
+    <th:block th:include="fragment/footer.html :: footer"></th:block>
+</div>
+<script>
+    // $(document).ready(function(){
+    //     function readURL(input) {
+    //         if (input.files && input.files[0]) {
+    //             var reader = new FileReader();
+    //             reader.onload = function(e) {
+    //                 $('#getImage').attr('src', e.target.result);
+    //             }
+    //             reader.readAsDataURL(input.files[0]);
+    //         }
+    //     }
+    //     $("#imageInput").change(function() {
+    //         readURL(this);
+    //     });
+    // });
+</script>
+</body>
+</html>

@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+    <!-- Font Awesome -->
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+    <!-- Bootstrap core CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Material Design Bootstrap -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.2/css/mdb.min.css" rel="stylesheet">
+    <style>
+
+        .btn {
+            padding: 5px 10px;
+            width: 70px;
+            margin: 2px;
+            height:40px;
+        }
+        .m {
+            padding: 5px 10px;
+            width: 150px;
+            margin: 2px;
+            height:40px;
+        }
+        #dtable{
+            min-height: 700px;
+        }
+        th,td{
+            text-align: center;
+        }
+        td.align-middle{
+            padding: 0px 0px 0px!important;
+        }
+        .default-color {
+            background-color: purple!important;
+        }
+        .cyan.darken-3 {
+            background-color: purple!important;
+        }
+        #tt{
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container-fluid">
+    <th:block th:include="fragment/navbar.html :: navbar" ></th:block>
+    <!--<div class="row" th:if="${ARTICLES.size()} > 0">-->
+    <!--<div style="padding-top: 10px;color: white;">hfhtx</div>-->
+    <div class="row py-3">
+        <div class="col-md-6" >
+            <a th:href="@{/add}"><button class="btn m btn-primary" th:text="#{addnew}">+Add new Record</button></a>
+        </div>
+        <div class="col-md-4" >
+            <div class="active-purple active-purple-2">
+                <input class="form-control" type="text" placeholder="Search"  id="search">
+            </div>
+        </div>
+        <div class="col-md-2" >
+            <select class="browser-default custom-select">
+                <option selected>Open this select menu</option>
+                <option value="1">One</option>
+                <option value="2">Two</option>
+                <option value="3">Three</option>
+            </select>
+        </div>
+    </div>
+        <div id="dtable" class="col-sm-12">
+            <table class="table table-bordered" style="width: 100%;padding: 0px 0px" >
+                <thead>
+                    <tr style="background-color: black;color: white">
+                        <th scope="col" width="5%" th:text="#{id}">ID</th>
+                        <th scope="col" width="15%" th:text="#{ttitle}">Title</th>
+                        <th scope="col" width="10%" th:text="#{auther}">Auther</th>
+                        <th scope="col" width="15%" th:text="#{category}">Category</th>
+                        <th scope="col" width="20%" th:text="#{des}">Decription</th>
+                        <th scope="col" width="10%" th:text="#{thumbnail}">Thumbnail</th>
+                        <th scope="col" width="25%" th:text="#{action}">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                <tr th:each="article : ${articles}" th:object="${article}" >
+                    <td class="align-middle" th:text="*{id}"></td>
+                    <td class="align-middle" th:text="*{title}"></td>
+                    <td class="align-middle" th:text="*{auther}"></td>
+                    <td class="align-middle" th:text="*{category.name}"></td>
+                    <td class="align-middle" th:text="*{description}"></td>
+                    <td class="align-middle">
+                        <a href=""><img th:src="'image/'+*{thumbnail}" alt="icon" class="alignnone size-full wp-image-156" width="100px" height="50px"/></a>
+                    </td>
+                    <td class="align-middle">
+                        <a th:href="@{/update/{id}(id=*{id})}"><button class="btn btn-primary"
+                                                                       type="button" th:text="#{edit}">edit</button></a>
+                        <a th:href="@{/veiw/{id}(id=*{id})}"><button class="btn btn-primary"
+                                                                     type="button" th:text="#{addbtn}">view</button></a>
+                        <a th:href="@{/delete/{id}(id=*{id})}"><button type="button"
+                                                                       class="btn btn-primary" th:text="#{delete}">delete</button></a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+
+            <div class="d-flex justify-content-center">
+                <nav aria-label="...">
+                    <ul class="pagination">
+                        <li class="page-item" th:classappend="${currentPage eq 1} ? disabled">
+                            <a th:href="@{/(page = 1, limit = 10)}" class="page-link"><i class="fas fa-step-backward"></i></a>
+                        </li>
+                        <li class="page-item" th:classappend="${currentPage eq 1} ? disabled">
+                            <a class="page-link" th:href="@{/(page = ${currentPage} - 1, limit = 10)}" tabindex="-1">Previous</a>
+                        </li>
+
+                        <th:block th:if="${currentPage - 1 gt 0 and currentPage + 1 <= lastPage}">
+                            <li class="page-item" th:each="pageNo : ${#numbers.sequence(currentPage - 1, currentPage + 1)}"
+                                th:classappend="${currentPage eq pageNo}? 'active' : ''">
+                                <a class="page-link" th:href="@{/(page = ${pageNo}, limit = 10)}" th:text="${pageNo}" tabindex="-1"></a>
+                            </li>
+                        </th:block>
+
+                        <th:block th:if="${currentPage - 1 eq 0}">
+                            <li class="page-item" th:each="pageNo : ${#numbers.sequence(currentPage, lastPage > 3 ? currentPage + 2 : lastPage)}"
+                                th:classappend="${currentPage eq pageNo}? 'active' : ''">
+                                <a class="page-link" th:href="@{/(page = ${pageNo}, limit = 10)}" th:text="${pageNo}" tabindex="-1"></a>
+                            </li>
+                        </th:block>
+
+                        <th:block th:if="${currentPage eq lastPage}">
+                            <li class="page-item" th:each="pageNo : ${#numbers.sequence(currentPage - 2 < 1 ? 1 : currentPage - 2, currentPage)}"
+                                th:classappend="${currentPage eq pageNo}? 'active' : ''">
+                                <a class="page-link" th:href="@{/(page = ${pageNo}, limit = 10)}" th:text="${pageNo}" tabindex="-1"></a>
+                            </li>
+                        </th:block>
+
+                        <li class="page-item" th:classappend="${currentPage eq lastPage} ? disabled">
+                            <a class="page-link" th:href="@{/(page = ${currentPage} + 1, limit = 10)}">Next</a>
+                        </li>
+                        <li class="page-item" th:classappend="${currentPage eq lastPage} ? disabled">
+                            <a th:href="@{/(page = ${lastPage}, limit = 10)}" class="page-link"><i class="fas fa-step-forward"></i></a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
+<footer id="footer">
+    <th:block th:include="fragment/footer.html :: footer"></th:block>
+</footer>
+<script>
+    $("#search").change(function () {
+        console.log("jdf")
+    });
+</script>
+<!-- JQuery -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<!-- Bootstrap tooltips -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"></script>
+<!-- Bootstrap core JavaScript -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<!-- MDB core JavaScript -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.2/js/mdb.min.js"></script>
+</body>
+</html>

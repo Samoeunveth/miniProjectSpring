@@ -1,0 +1,61 @@
+<div class="col-md-12" th:fragment="navbar" id="nav">
+    <nav class="navbar navbar-dark default-color justify-content-between">
+        <h1 class="navbar-brand" style="font-size: 30px" th:text="#{title}">Article Managerment</h1>
+        <!--btn-outline-white-->
+        <div style="width: 50%"></div>
+        <a th:href="@{/}" style="color: white"><h5 th:text="#{article}">Article</h5></a>
+        <a th:href="@{/category}" style="color: white"><h5 th:text="#{category}">Category</h5></a>
+        <form>
+            <a href="?lang=en"> <img
+                    src="https://vignette.wikia.nocookie.net/centuriamc/images/b/ba/Kings-colours-first-union-jack-flag-1606.png/revision/latest?cb=20190509222526"
+                    width=40px hight=40px /></a>
+            <a href="?lang=kh"> <img src="https://cdn.countryflags.com/thumbs/cambodia/flag-400.png" width=40px
+                                     hight=40px /></a>
+        </form>
+    </nav>
+</div>
+<!--Navbar-->
+<!--<div class="col-md-12" th:fragment="navbar">-->
+    <!--<nav class="navbar navbar-expand-lg navbar-dark primary-color">-->
+
+        <!--&lt;!&ndash; Navbar brand &ndash;&gt;-->
+        <!--<a class="navbar-brand" th:href="@{/}" style="font-size: 30px" th:text="#{title}">Article Managerment</a>-->
+
+        <!--&lt;!&ndash; Collapse button &ndash;&gt;-->
+        <!--<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav"-->
+                <!--aria-controls="basicExampleNav" aria-expanded="false" aria-label="Toggle navigation">-->
+            <!--<span class="navbar-toggler-icon"></span>-->
+        <!--</button>-->
+
+        <!--&lt;!&ndash; Collapsible content &ndash;&gt;-->
+        <!--<div class="collapse navbar-collapse" id="basicExampleNav">-->
+
+            <!--&lt;!&ndash; Links &ndash;&gt;-->
+            <!--<ul class="navbar-nav mr-auto">-->
+
+                <!--<li class="nav-item">-->
+                    <!--<a class="nav-link" href="#">Category</a>-->
+                <!--</li>-->
+                <!--<li class="nav-item active">-->
+                    <!--<a th:href="@{/add}"><button class="btn btn-primary" th:text="#{addnew}">+Add new-->
+                        <!--Record</button></a>-->
+                <!--</li>-->
+
+            <!--</ul>-->
+            <!--&lt;!&ndash; Links &ndash;&gt;-->
+
+            <!--<form class="form-inline">-->
+                <!--<div class="md-form my-0">-->
+                    <!--<input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">-->
+                    <!--<select class="form-control mr-sm-2" style="border: none">-->
+                        <!--<option value="volvo" style="background-color: blue">Volvo</option>-->
+                        <!--<option value="volvo" style="background-color: blue">test</option>-->
+                    <!--</select>-->
+                <!--</div>-->
+            <!--</form>-->
+        <!--</div>-->
+        <!--&lt;!&ndash; Collapsible content &ndash;&gt;-->
+
+    <!--</nav>-->
+<!--</div>-->
+<!--/.Navbar-->
